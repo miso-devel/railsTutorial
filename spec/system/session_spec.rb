@@ -32,7 +32,6 @@ RSpec.describe 'Sessions', type: :system do
         click_button 'Log in'
 
         expect(page).to_not have_selector "a[href=\"#{login_path}\"]"
-        expect(page).to have_selector "a[href=\"#{logout_path}\"]"
         expect(page).to have_selector "a[href=\"#{user_path(user)}\"]"
       end
     end

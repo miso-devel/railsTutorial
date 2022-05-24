@@ -7,7 +7,7 @@
 
 
     <% if logged_in? %>
-    <%= link_to "Log out", logout_path, method: :delete,class:"font-extrabold text-lg" %>
+    <%= button_to "Log out", logout_path, method: :delete ,class:"font-extrabold text-lg" %>
     <%= link_to "Settings", '#',class:"font-extrabold text-lg" %>
     <%= link_to "profile", current_user ,class:"font-extrabold text-lg" %>
     <% else %>

@@ -6,6 +6,9 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       # ユーザーログイン後にユーザー情報のページにリダイレクトする
       log_in(user)
+
+      # これ使ってんのmodelのforget? helperのforgetやとcookieがないのでdeleteされずエラー吐き出しそう
+      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
       redirect_to user
     else
       # エラーメッセージを作成する
