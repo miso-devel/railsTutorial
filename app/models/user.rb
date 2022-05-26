@@ -18,7 +18,7 @@ class User < ApplicationRecord
               # 大文字小文字関係なく一意性を保つ
               case_sensitive: false,
             }
-  validates :password, presence: true, length: { minimum: 6 }
+  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
   has_secure_password
 
   # 渡された文字列のハッシュ値を返す

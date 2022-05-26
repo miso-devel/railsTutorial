@@ -16,4 +16,22 @@ RSpec.describe 'Users', type: :system do
       end
     end
   end
+  describe '#index' do
+    let!(:user) { FactoryBot.create(:user) }
+    let!(:other_user) { FactoryBot.create(:other_user) }
+
+    it 'adminユーザならdeleteリンクが表示されること' do
+      log_in user
+      visit users_path
+
+      expect(page).to have_button 'delete'
+    end
+
+    it 'adminユーザでなければdeleteリンクが表示されないこと' do
+      log_in other_user
+      visit users_path
+
+      expect(page).to_not have_button 'delete'
+    end
+  end
 end
