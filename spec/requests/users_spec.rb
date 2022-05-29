@@ -10,11 +10,12 @@ RSpec.describe 'Users', type: :request do
       let(:user) { FactoryBot.create(:user) }
       before do
         30.times { FactoryBot.create(:continuous_users) }
-        log_in user
+        log_in(user)
         get users_path
       end
 
       it 'div.paginationが存在すること' do
+        get users_path
         expect(
           response.body,
         ).to include '<div role="navigation" aria-label="Pagination" class="pagination">'
@@ -23,6 +24,7 @@ RSpec.describe 'Users', type: :request do
       it 'ユーザごとの名前' do
         User
           .paginate(page: 1)
+          .where(activated: true)
           .each { |user| expect(response.body).to include "#{user.name}" }
       end
     end
@@ -64,21 +66,21 @@ RSpec.describe 'Users', type: :request do
         ).by 1
       end
 
-      it 'users/showにリダイレクトされること' do
-        post users_path, params: user_params
-        user = User.last
-        expect(response).to redirect_to user
-      end
+      # it 'users/showにリダイレクトされること' do
+      #   post users_path, params: user_params
+      #   user = User.last
+      #   expect(response).to redirect_to user
+      # end
 
       it 'flashが表示されていること' do
         post users_path, params: user_params
         expect(flash).to be_any
       end
 
-      it 'ログイン状態であること' do
-        post users_path, params: user_params
-        expect(logged_in?).to be_truthy
-      end
+      # it 'ログイン状態であること' do
+      #   post users_path, params: user_params
+      #   expect(logged_in?).to be_truthy
+      # end
 
       context '別のユーザの場合' do
         let(:other_user) { FactoryBot.create(:other_user) }
@@ -93,6 +95,18 @@ RSpec.describe 'Users', type: :request do
           log_in(user)
           get edit_user_path(other_user)
           expect(response).to redirect_to root_path
+        end
+
+        before { ActionMailer::Base.deliveries.clear }
+
+        it 'メールが1件存在すること' do
+          post users_path, params: user_params
+          expect(ActionMailer::Base.deliveries.size).to eq 1
+        end
+
+        it '登録時点ではactivateされていないこと' do
+          post users_path, params: user_params
+          expect(User.last).to_not be_activated
         end
       end
     end
