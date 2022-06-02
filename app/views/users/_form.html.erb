@@ -1,6 +1,6 @@
  <div class="shadow-2xl justify-center m-20 py-10 px-40 grid grid-cols-1 text-center">
      <%= form_with(model: @user, local: true) do |f| %>
-     <%= render 'shared/error_messages' %>
+     <%= render 'shared/error_messages', object: f.object %>
 
      <div class="py-3 grid grid-cols-2">
          <%= f.label :name %>

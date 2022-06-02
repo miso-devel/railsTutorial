@@ -1,0 +1,21 @@
+<div class="py-5 shadow-lg mx-20">
+    <li id="micropost-<%= micropost.id %>">
+        <div class="flex justify-center">
+            <%= link_to gravatar_for(micropost.user), micropost.user %>
+        </div>
+
+        <span class="user"><%= link_to micropost.user.name, micropost.user %></span>
+        <span class="content"><%= micropost.content %></span>
+        <%= image_tag micropost.display_image if micropost.image.attached? %>
+        <span class="timestamp block">
+            Posted <%= time_ago_in_words(micropost.created_at) %> ago.
+            <% if current_user?(micropost.user) %>
+            <div class="block">
+                <%= link_to "delete", micropost, method: :delete,
+                                       data: { confirm: "You sure?" } %>
+            </div>
+
+            <% end %>
+        </span>
+    </li>
+</div>

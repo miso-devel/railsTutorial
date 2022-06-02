@@ -1,5 +1,28 @@
+<% if logged_in? %>
+
+
+<div class="grid grid-cols-3">
+  <div class="shadow-lg m-10">
+    <%= render 'shared/user_info' %>
+    <div class="mt-10">
+      <%= render 'shared/micropost_form' %>
+    </div>
+
+  </div>
+
+  <div class="col-span-2">
+    <%= render 'shared/feed' %>
+  </div>
+
+</div>
+
+<% else %>
+
+
 <div>
   <%= link_to image_tag("rails.svg", alt: "Rails logo", width: "200px",class:"my-10 mx-auto"),"https://rubyonrails.org/" %>
   <h1 class="font-bold text-4xl">Home</h1>
   <%= link_to "Sign up now!", '#', class: "font-bold" %>
 </div>
+
+<% end %>
