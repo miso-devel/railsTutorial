@@ -1,0 +1,15 @@
+- if logged_in?
+  .grid.grid-cols-3
+    .shadow-lg.m-10
+      = render 'shared/user_info'
+      .stats
+        = render 'shared/stats'
+      .mt-10
+        = render 'shared/micropost_form'
+    .col-span-2
+      = render 'shared/feed'
+- else
+  %div
+    = link_to image_tag("rails.svg", alt: "Rails logo", width: "200px",class:"my-10 mx-auto"),"https://rubyonrails.org/"
+    %h1.font-bold.text-4xl Home
+    = link_to "Sign up now!", '#', class: "font-bold"

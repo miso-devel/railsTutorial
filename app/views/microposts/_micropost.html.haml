@@ -1,0 +1,13 @@
+.py-5.shadow-lg.mx-20
+  %li{:id => "micropost-#{micropost.id}"}
+    .flex.justify-center
+      = link_to gravatar_for(micropost.user), micropost.user
+    %span.user= link_to micropost.user.name, micropost.user
+    %span.content= micropost.content
+    = image_tag micropost.display_image if micropost.image.attached?
+    %span.timestamp.block
+      Posted #{time_ago_in_words(micropost.created_at)} ago.
+      - if current_user?(micropost.user)
+        .block
+          = link_to "delete", micropost, method: :delete, |
+            data: { confirm: "You sure?" }                |

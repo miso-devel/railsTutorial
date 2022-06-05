@@ -1,0 +1,17 @@
+.shadow-2xl.justify-center.m-20.py-10.px-40.grid.grid-cols-1.text-center
+  = form_with(model: @user, local: true) do |f|
+    = render 'shared/error_messages', object: f.object
+    .py-3.grid.grid-cols-2
+      = f.label :name
+      = f.text_field :name
+    .py-3.grid.grid-cols-2
+      = f.label :email
+      = f.email_field :email
+    .py-3.grid.grid-cols-2
+      = f.label :password
+      = f.password_field :password
+    .py-3.grid.grid-cols-2
+      = f.label :password_confirmation, "Confirmation"
+      = f.password_field :password_confirmation
+    .text-center.my-5
+      = f.submit "Create my account", class: "p-3 bg-amber-400 rounded-lg"

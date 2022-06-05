@@ -1,0 +1,12 @@
+!!!
+%html
+  %body
+    = render 'layouts/head'
+    %main.m-10
+      = render 'layouts/header'
+      - flash.each do |message_type, message|
+        %div{:class => "alert alert-#{message_type} text-center my-20 p-10 bg-lime-400"}= message
+      .text-center.my-40
+        = yield
+        .bg-slate-100.m-20.p-20.shadow-2xl
+          = debug(params) if Rails.env.development?

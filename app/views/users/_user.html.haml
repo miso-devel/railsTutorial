@@ -1,0 +1,5 @@
+.grid.grid-cols-2.place-items-center.m-10.p-10.shadow-lg
+  = gravatar_for user
+  = link_to user.name, user
+  - if current_user.admin? && !current_user?(user)
+    | #{button_to "delete", user, method: :delete, data: { confirm: "You sure?" }}
