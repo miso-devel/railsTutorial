@@ -4,15 +4,21 @@
 <div class="grid grid-cols-3">
   <div class="shadow-lg m-10">
     <%= render 'shared/user_info' %>
+    <div class="stats">
+      <%= render 'shared/stats' %>
+    </div>
     <div class="mt-10">
       <%= render 'shared/micropost_form' %>
     </div>
+
 
   </div>
 
   <div class="col-span-2">
     <%= render 'shared/feed' %>
   </div>
+
+
 
 </div>
 
